@@ -21,7 +21,7 @@ import static org.junit.Assert.assertTrue;
 import java.io.IOException;
 
 import org.junit.After;
-import orsssssssg.junit.Assume;
+import org.junit.Assume;
 import org.junit.Before;
 import org.junit.BeforeClass;
 import org.junit.Test;
@@ -260,4 +260,4 @@ public class NewLayoutTemplateWizardTests extends SWTBotBase implements CreateLa
         page.setWapTemplateFileText( "/aa.wap.tpl" );
         assertEquals( true, page.finishButton().isEnabled() );
     }
-}qwqwqw
+}
