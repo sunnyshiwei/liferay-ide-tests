@@ -54,6 +54,7 @@ import com.liferay.ide.ui.tests.swtbot.page.TreePO;
 
 /**
  * @author Ashley Yuan
+ * @author Sunny Shi
  */
 public class LiferayPortletWizardTests extends SWTBotBase implements LiferayPortletWizard, ProjectWizard
 {
@@ -79,13 +80,48 @@ public class LiferayPortletWizardTests extends SWTBotBase implements LiferayPort
         unzipServer();
     }
 
+    @Before
+    public void preparePortletPlguinProject() throws Exception
+    {
+        Assume.assumeTrue( runTest() || runAllTests() );
+
+        Boolean hasProject = addedProjects();
+
+        eclipse.getNewToolbar().getLiferayPluginProject().click();
+
+        newLiferayProjectPage.createSDKProject( "test", "Portlet", true, false );
+
+        if( !hasProject )
+        {
+            newLiferayProjectPage.next();
+
+            newLiferayProjectPage.next();
+
+            SetSDKLocationPO setSdkPage = new SetSDKLocationPO( bot );
+
+            setSdkPage.setSdkLocation( getLiferayPluginsSdkDir().toString() );
+        }
+        sleep( 8000 );
+        newLiferayProjectPage.finish();
+        sleep( 20000 );
+    }
+
     @After
     public void cleanAll()
     {
         sleep( 3000 );
         eclipse.closeShell( LABEL_NEW_LIFERAY_PLUGIN_PROJECT );
         eclipse.closeShell( LABEL_NEW_LIFERAY_PORTLET );
-        eclipse.getPackageExporerView().deleteProjectExcludeNames( new String[] { getLiferayPluginsSdkName() }, true );
+        try
+        {
+            eclipse.getPackageExporerView().deleteProjectExcludeNames(
+                new String[] { getLiferayPluginsSdkName() }, true );
+        }
+        catch( Exception e )
+        {
+            eclipse.getPackageExporerView().deleteProjectExcludeNames(
+                new String[] { getLiferayPluginsSdkName() }, true );
+        }
     }
 
     @Test
@@ -884,10 +920,9 @@ public class LiferayPortletWizardTests extends SWTBotBase implements LiferayPort
 
         // relate ticket IDE-2156, regression for IDE-119
         TreePO projectTree = eclipse.showPackageExporerView().getProjectTree();
-
+        sleep( 2000 );
         eclipse.showPackageExporerView().getProjectTree().getTreeItem( "test-portlet" ).getTreeItem(
             "docroot", "WEB-INF", "liferay-display.xml" ).doAction( BUTTON_DELETE );
-
         DialogPO deleteDialog = new DialogPO( bot, "New Liferay Portlet", BUTTON_CANCEL, BUTTON_OK );
         deleteDialog.confirm();
 
@@ -1073,34 +1108,6 @@ public class LiferayPortletWizardTests extends SWTBotBase implements LiferayPort
         assertContains(
             "<init-param>\n\t\t\t<name>view-template</name>\n\t\t\t<value>/html/myportlet/view.jsp</value>\n\t\t</init-param>\n\t\t<expiration-cache>0</expiration-cache>\n\t\t<supports>\n\t\t\t<mime-type>text/html</mime-type>\n\t\t\t<portlet-mode>view</portlet-mode>\n\t\t</supports>\n\t\t<portlet-info>\n\t\t\t<title>My Portlet</title>\n\t\t\t<short-title>My Portlet</short-title>\n\t\t\t<keywords></keywords>\n\t\t</portlet-info>",
             portletXmlPage.getText() );
-    }
-
-    @Before
-    public void preparePortletPlguinProject() throws Exception
-    {
-        Assume.assumeTrue( runTest() || runAllTests() );
-
-        Boolean hasProject = addedProjects();
-
-        eclipse.getNewToolbar().getLiferayPluginProject().click();
-
-        newLiferayProjectPage.createSDKProject( "test", "Portlet", true, false );
-
-        if( !hasProject )
-        {
-            newLiferayProjectPage.next();
-
-            newLiferayProjectPage.next();
-
-            SetSDKLocationPO setSdkPage = new SetSDKLocationPO( bot );
-
-            setSdkPage.setSdkLocation( getLiferayPluginsSdkDir().toString() );
-        }
-        sleep( 4000 );
-        newLiferayProjectPage.finish();
-
-        sleep( 4000 );
-
     }
 
     @Test
