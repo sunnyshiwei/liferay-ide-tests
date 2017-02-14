@@ -85,7 +85,7 @@ public class ModuleProjectWizardTests extends SWTBotBase implements ModuleProjec
         CreateModuleProjectWizardPO createModuleProjectWizard =
             new CreateModuleProjectWizardPO( bot, INDEX_NEW_LIFERAY_MODULE_PROJECT_VALIDATION_MESSAGE );
 
-        sleep( 150000 );
+        sleep( 5000 );
         assertEquals( TEXT_ENTER_MODULE_PROJECT_NAME_MESSAGE, createModuleProjectWizard.getValidationMessage() );
 
         createModuleProjectWizard.cancel();
@@ -133,11 +133,11 @@ public class ModuleProjectWizardTests extends SWTBotBase implements ModuleProjec
         String[] expectedModuleProjectTemplateItems =
             { MENU_MODULE_ACTIVATOR, MENU_MODULE_API, MENU_MODULE_CONTENT_TARGETING_REPORT,
                 MENU_MODULE_CONTENT_TARGETING_RULE, MENU_MODULE_CONTENT_TARGETING_TRACKING_ACTION,
-                MENU_MODULE_CONTROL_MENU_ENTRY, MENU_MODULE_MVC_PORTLET, MENU_MODULE_PANEL_APP, MENU_MODULE_PORTLET,
-                MENU_MODULE_PORTLET_CONFIGURATION_ICON, MENU_MODULE_PORTLET_PROVIDER,
+                MENU_MODULE_CONTROL_MENU_ENTRY, MENU_MODULE_FORM_FIELD, MENU_MODULE_MVC_PORTLET, MENU_MODULE_PANEL_APP,
+                MENU_MODULE_PORTLET, MENU_MODULE_PORTLET_CONFIGURATION_ICON, MENU_MODULE_PORTLET_PROVIDER,
                 MENU_MODULE_PORTLET_TOOLBAR_CONTRIBUTOR, MENU_MODULE_REST, MENU_MODULE_SERVICE,
                 MENU_MODULE_SERVICE_BUILDER, MENU_MODULE_SERVICE_WRAPPER, MENU_MODULE_SIMULATION_PANEL_ENTRY,
-                MENU_MODULE_TEMPLATE_CONTEXT_CONTRIBUTOR, MENU_MODULE_THEME, MENU_MODULE_THEME_CONTRIBUTOR };
+                MENU_MODULE_TEMPLATE_CONTEXT_CONTRIBUTOR, MENU_MODULE_THEME, MENU_MODULE_THEME_CONTRIBUTOR, };
 
         String[] moduleProjectTemplateItems =
             createModuleProjectWizard.getProjectTemplateNameComboBox().getAvailableComboValues();
