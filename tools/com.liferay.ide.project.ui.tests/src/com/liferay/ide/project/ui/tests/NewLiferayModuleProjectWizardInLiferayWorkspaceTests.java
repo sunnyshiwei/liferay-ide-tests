@@ -180,10 +180,11 @@ public class NewLiferayModuleProjectWizardInLiferayWorkspaceTests extends Abstra
         openEditorAndCheck(
             gradleContent, projectName, liferayWorkspaceName, "modules", projectName, buildGradleFileName );
 
-        assertTrue( projectTree.expandNode(
-            liferayWorkspaceName, "modules", projectName, "src/main/java",
-            "testControlMenuEntryProjectInLS.control.menu",
-            "TestControlMenuEntryProjectInLSProductNavigationControlMenuEntry.java" ).isVisible() );
+        assertTrue(
+            projectTree.expandNode(
+                liferayWorkspaceName, "modules", projectName, "src/main/java",
+                "testControlMenuEntryProjectInLS.control.menu",
+                "TestControlMenuEntryProjectInLSProductNavigationControlMenuEntry.java" ).isVisible() );
     }
 
     @Test
@@ -513,8 +514,8 @@ public class NewLiferayModuleProjectWizardInLiferayWorkspaceTests extends Abstra
 
         try
         {
-            projectTree.expandNode( liferayWorkspaceName, "modules", projectName ).doAction( "Gradle",
-                "Refresh Gradle Project" );
+            projectTree.expandNode( liferayWorkspaceName, "modules", projectName ).doAction(
+                "Gradle", "Refresh Gradle Project" );
         }
         catch( Exception e )
         {
@@ -523,9 +524,10 @@ public class NewLiferayModuleProjectWizardInLiferayWorkspaceTests extends Abstra
         }
 
         sleep( 10000 );
-        assertTrue( projectTree.expandNode(
-            liferayWorkspaceName, "modules", projectName, projectName + "-api", "src/main/java",
-            "testServiceBuilderProjectInLS.service" ).isVisible() );
+        assertTrue(
+            projectTree.expandNode(
+                liferayWorkspaceName, "modules", projectName, projectName + "-api", "src/main/java",
+                "testServiceBuilderProjectInLS.service" ).isVisible() );
         assertTrue(
             projectTree.expandNode(
                 liferayWorkspaceName, "modules", projectName, projectName + "-service", "src/main/java",

@@ -16,6 +16,7 @@
 package com.liferay.ide.project.ui.tests;
 
 import static org.eclipse.swtbot.swt.finder.SWTBotAssert.assertContains;
+
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertTrue;
@@ -1306,7 +1307,7 @@ public class NewLiferayModuleProjectWizardTests extends SWTBotBase implements Ne
         assertFalse( createModuleProjectWizard.finishButton().isEnabled() );
         createModuleProjectWizard.createModuleProject( "$" );
         sleep( 1000 );
-        assertEquals( TEXT_INVALID_NAME_FOR_GRADLE_PROJECT, createModuleProjectWizard.getValidationMessage() );
+        assertEquals( TEXT_INVALID_NAME_FOR_PROJECT, createModuleProjectWizard.getValidationMessage() );
         assertFalse( createModuleProjectWizard.finishButton().isEnabled() );
         createModuleProjectWizard.createModuleProject( "" );
         sleep( 1000 );
